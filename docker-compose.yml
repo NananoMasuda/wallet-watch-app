@@ -30,7 +30,7 @@ services:
   # DB
   db:
     build:
-      context: ./DB
+      context: ./db
       dockerfile: Dockerfile
     container_name: vgs-db
     ports:
