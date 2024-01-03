@@ -1,0 +1,3 @@
+[submodule "vue-wallet"]
+	path = vue-wallet
+	url = https://github.com/NananoMasuda/wallet-watch-app
