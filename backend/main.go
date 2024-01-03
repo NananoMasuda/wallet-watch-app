@@ -1,20 +1,24 @@
-// backend/main.go
 package main
 
 import (
-	"net/http"
-
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
+	"github.com/NananoMasuda/wallet-watch-app/handler"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
-	router := mux.NewRouter()
+	// Echoのインスタンス作る
+	e := echo.New()
 
-	// Your API routes here
+	// 全てのリクエストで差し込みたいミドルウェア（ログとか）はここ
+	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-	handler := cors.Default().Handler(router)
+	// ルーティング
+	e.POST("/yamabiko", handler.YamabikoAPI())
+	e.OPTIONS("/yamabiko", handler.OptionsCheck())
 
-	http.Handle("/", handler)
-	http.ListenAndServe(":8000", nil)
+	// サーバー起動
+	e.Start(":8000")
 }
