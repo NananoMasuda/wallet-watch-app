@@ -1,24 +1,38 @@
 package main
 
 import (
-	"github.com/NananoMasuda/wallet-watch-app/handler"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Echoのインスタンス作る
-	e := echo.New()
+	r := gin.Default()
 
-	// 全てのリクエストで差し込みたいミドルウェア（ログとか）はここ
-	e.Use(middleware.CORS())
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	r.POST("/api/login", func(c *gin.Context) {
+		var loginRequest struct {
+			Username string `json:"username" binding:"required"`
+			Password string `json:"password" binding:"required"`
+		}
 
-	// ルーティング
-	e.POST("/yamabiko", handler.YamabikoAPI())
-	e.OPTIONS("/yamabiko", handler.OptionsCheck())
+		if err := c.ShouldBindJSON(&loginRequest); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
 
-	// サーバー起動
-	e.Start(":8000")
+		// ログインの処理をここに実装
+		if isValidUser(loginRequest.Username, loginRequest.Password) {
+			c.JSON(http.StatusOK, gin.H{"message": "ログイン成功"})
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "ログイン失敗"})
+		}
+	})
+
+	r.Run(":8080")
+}
+
+func isValidUser(username, password string) bool {
+	// ユーザーの認証処理
+	// 例: ユーザー名が "admin" でパスワードが "password" の場合にtrueを返す
+	return username == "admin" && password == "password"
 }
