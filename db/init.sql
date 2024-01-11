@@ -1,3 +1,4 @@
+-- 以下はサンプル
 CREATE DATABASE IF NOT EXISTS vgs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'root';
 GRANT ALL PRIVILEGES ON vgs.* TO 'user'@'%';

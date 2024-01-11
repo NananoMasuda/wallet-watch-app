@@ -6,7 +6,7 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile
-    container_name: vgs-backend
+    container_name: wwa-backend
     ports:
       - 8000:8000
     tty: true # コンテナの起動永続化
@@ -20,7 +20,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: vgs-frontend
+    container_name: wwa-frontend
     ports:
       - 8080:8080
     tty: true # コンテナの起動永続化
@@ -32,9 +32,9 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile
-    container_name: vgs-db
+    container_name: wwa-db
     ports:
-      - 33060:3306
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
