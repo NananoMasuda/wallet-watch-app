@@ -13,6 +13,12 @@ type RegisterInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type LoginInput struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+// ユーザーの登録
 func Register(c *gin.Context) {
 	var input RegisterInput
 
@@ -34,11 +40,7 @@ func Register(c *gin.Context) {
 	})
 }
 
-type LoginInput struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
+// ユーザーの認証・トークン生成
 func Login(c *gin.Context) {
 	var input LoginInput
 
@@ -59,6 +61,7 @@ func Login(c *gin.Context) {
 	})
 }
 
+// ユーザー取得
 func CurrentUser(c *gin.Context) {
 	userId, err := token.ExtractTokenId(c)
 

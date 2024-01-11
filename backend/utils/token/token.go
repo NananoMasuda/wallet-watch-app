@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// トークン生成
 func GenerateToken(id uint) (string, error) {
 	tokenLifespan, err := strconv.Atoi(os.Getenv("TOKEN_HOUR_LIFESPAN"))
 
@@ -27,31 +28,7 @@ func GenerateToken(id uint) (string, error) {
 	return token.SignedString([]byte(os.Getenv("API_SECRET")))
 }
 
-func extractTokenString(c *gin.Context) string {
-	bearToken := c.Request.Header.Get("Authorization")
-	strArr := strings.Split(bearToken, " ")
-	if len(strArr) == 2 {
-		return strArr[1]
-	}
-
-	return ""
-}
-
-func parseToken(tokenString string) (*jwt.Token, error) {
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("There was an error")
-		}
-		return []byte(os.Getenv("API_SECRET")), nil
-	})
-
-	if err != nil {
-		return nil, err
-	}
-
-	return token, nil
-}
-
+// トークンを検証
 func TokenValid(c *gin.Context) error {
 	tokenString := extractTokenString(c)
 
@@ -64,6 +41,7 @@ func TokenValid(c *gin.Context) error {
 	return nil
 }
 
+// ユーザーID取得
 func ExtractTokenId(c *gin.Context) (uint, error) {
 	tokenString := extractTokenString(c)
 
@@ -86,4 +64,31 @@ func ExtractTokenId(c *gin.Context) (uint, error) {
 	}
 
 	return 0, nil
+}
+
+// HTTPリクエストのヘッダーからトークンを抽出
+func extractTokenString(c *gin.Context) string {
+	bearToken := c.Request.Header.Get("Authorization")
+	strArr := strings.Split(bearToken, " ")
+	if len(strArr) == 2 {
+		return strArr[1]
+	}
+
+	return ""
+}
+
+// トークン文字列を解析・検証
+func parseToken(tokenString string) (*jwt.Token, error) {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("There was an error")
+		}
+		return []byte(os.Getenv("API_SECRET")), nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return token, nil
 }

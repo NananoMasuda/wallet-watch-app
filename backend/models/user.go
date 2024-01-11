@@ -14,6 +14,7 @@ type User struct {
 	Password string `gorm:"size:255;not null;" json:"password"`
 }
 
+// ユーザーをDBに保存
 func (u User) Save() (User, error) {
 	err := DB.Create(&u).Error
 	if err != nil {
@@ -35,11 +36,13 @@ func (u *User) BeforeSave() error {
 	return nil
 }
 
+// セキュリティ保護のためパスワード情報削除
 func (u User) PrepareOutput() User {
 	u.Password = ""
 	return u
 }
 
+//ユーザーの認証・トークン生成
 func GenerateToken(username string, password string) (string, error) {
 	var user User
 
