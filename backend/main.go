@@ -5,6 +5,7 @@ import (
 	"backend/middlewares"
 	"backend/models"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,14 @@ func main() {
 
 	// Ginルーター初期化
 	router := gin.Default()
+
+	// CORSミドルウェアを追加
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:8000", "http://localhost:8080"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length"},
+		AllowCredentials: true,
+	}))
 
 	public := router.Group("/api")
 

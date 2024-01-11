@@ -1,45 +1,22 @@
 <!-- src/views/Login.vue -->
 <template>
     <div>
-        <h2>Login</h2>
-        <form @submit.prevent="login">
+        <h2>ログイン</h2>
+        <form>
             <label for="username">Username:</label>
             <input type="text" id="username" v-model="username" required>
             <br>
             <label for="password">Password:</label>
             <input type="password" id="password" v-model="password" required>
             <br>
-            <button type="submit">Login</button>
+            <button type="submit">ログイン</button>
         </form>
+        <div>
+            <p>登録がまだの方は<a href="/register">こちら</a></p>
+        </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-
-export default {
-    data() {
-        return {
-            username: '',
-            password: ''
-        };
-    },
-    methods: {
-        async login() {
-            try {
-                const response = await axios.post('http://localhost:8000/api/login', {
-
-                    username: this.username,
-                    password: this.password
-                });
-
-                console.log(response.data.message);
-
-            } catch (error) {
-                console.error('ログインエラー:', error.response.data.message);
-            }
-
-        }
-    }
-};
+    
 </script>
