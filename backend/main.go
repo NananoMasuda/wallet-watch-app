@@ -21,7 +21,7 @@ func main() {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:8000", "http://localhost:8080"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length", "Authorization"},
 		AllowCredentials: true,
 	}))
 
