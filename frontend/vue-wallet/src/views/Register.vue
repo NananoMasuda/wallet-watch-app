@@ -1,17 +1,17 @@
 <!-- src/views/Register.vue -->
 <template>
-    <div>
-        <h2>登録</h2>
-        <form @submit.prevent="registerUser">
-            <label for="username">Username:</label>
-            <input type="text" id="username" v-model="username" required>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" v-model="password" required>
-            <br>
-            <button type="submit">登録</button>
-        </form>
-    </div>
+  <div>
+      <h2>登録</h2>
+      <form @submit.prevent="registerUser">
+          <label for="username">Username:</label>
+          <input type="text" id="username" v-model="username" required>
+          <br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" v-model="password" required>
+          <br>
+          <button type="submit">登録</button>
+      </form>
+  </div>
 </template>
 
 <script>
@@ -39,6 +39,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
+        this.$router.push('/login');
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -47,3 +48,25 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form-item {
+  margin: 0 auto;
+  text-align: center;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 50%;
+  padding: .5em;
+  font: inherit;
+}
+
+button {
+  padding: 0.5em;
+  margin: 1em;
+}
+</style>
