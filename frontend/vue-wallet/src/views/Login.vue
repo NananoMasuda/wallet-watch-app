@@ -1,13 +1,15 @@
 <!-- src/views/Login.vue -->
 <template>
   <div>
-      <h2>ログイン</h2>
+      <h1>ログイン</h1>
       <form @submit.prevent="loginUser">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required>
+          <label for="username">
+          <input type="text" placeholder="Username" id="username" v-model="username" required>
+          </label>
           <br>
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required>
+          <label for="password">
+          <input type="password" placeholder="Password" id="password" v-model="password" required>
+          </label>
           <br>
           <button type="submit">ログイン</button>
       </form>
@@ -78,25 +80,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.form-item {
-  margin: 0 auto;
-  text-align: center;
-}
-
-label {
-  display: block;
-}
-
-input {
-  width: 50%;
-  padding: .5em;
-  font: inherit;
-}
-
-button {
-  padding: 0.5em;
-  margin: 1em;
-}
-</style>

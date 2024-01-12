@@ -1,16 +1,21 @@
 <!-- src/views/Register.vue -->
 <template>
   <div>
-      <h2>登録</h2>
+      <h1>登録</h1>
       <form @submit.prevent="registerUser">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required>
+          <label for="username">
+          <input type="text" placeholder="Username" id="username" v-model="username" required>
+          </label>
           <br>
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required>
+          <label for="password">
+          <input type="password" placeholder="Username" id="password" v-model="password" required>
+          </label>
           <br>
           <button type="submit">登録</button>
       </form>
+      <div>
+          <p><a href="/login">ログインページに戻る</a></p>
+      </div>
   </div>
 </template>
 
@@ -48,25 +53,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.form-item {
-  margin: 0 auto;
-  text-align: center;
-}
-
-label {
-  display: block;
-}
-
-input {
-  width: 50%;
-  padding: .5em;
-  font: inherit;
-}
-
-button {
-  padding: 0.5em;
-  margin: 1em;
-}
-</style>
