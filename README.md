@@ -30,7 +30,7 @@
 
 ## 画面一覧
  - ログイン画面  
-<img src="image.png" width="70%">
+<img src="images/image.png" width="70%">
 
  - アカウント登録画面  
-<img src="image-1.png" width="70%">
+<img src="images/image-1.png" width="70%">
