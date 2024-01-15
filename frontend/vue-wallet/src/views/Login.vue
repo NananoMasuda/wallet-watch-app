@@ -69,7 +69,7 @@ export default {
         })
         .catch(error => {
         console.error('Error:', error);
-        this.errorMessage = 'アカウントがありませんよ。先に登録してくださいね。';
+        this.errorMessage = 'アカウントがありません。先に登録してください。';
         })
 
       })
@@ -80,3 +80,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import '@/styles/variables.scss';
+  div.error-message {
+  color: $color-red;
+  text-align: center;
+  }
+</style>
