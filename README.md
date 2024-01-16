@@ -34,3 +34,6 @@
 
  - アカウント登録画面  
 <img src="images/image-1.png" width="70%">
+
+ - ホーム画面 
+<img src="images/home-image.png" width="70%">
